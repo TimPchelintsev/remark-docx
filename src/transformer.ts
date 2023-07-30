@@ -134,7 +134,7 @@ export interface DocxOptions
   /**
    * Set output type of `VFile.result`. `buffer` is `Promise<Buffer>`. `blob` is `Promise<Blob>`.
    */
-  output?: "buffer" | "blob";
+  output?: "buffer" | "blob" | "nodes";
   /**
    * **You must set** if your markdown includes images. See example for [browser](https://github.com/inokawa/remark-docx/blob/main/stories/playground.stories.tsx) and [Node.js](https://github.com/inokawa/remark-docx/blob/main/src/index.spec.ts).
    */
@@ -206,6 +206,8 @@ export const mdastToDocx = async (
       return typeof Buffer === "function" ? Buffer.from(bufOut) : bufOut;
     case "blob":
       return Packer.toBlob(doc);
+    case "nodes":
+      return nodes;
   }
 };
 
